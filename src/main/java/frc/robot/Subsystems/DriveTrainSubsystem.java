@@ -86,18 +86,6 @@ public class DriveTrainSubsystem extends SubsystemBase implements DriveTrainInte
             //System.out.println("new pose " + swerveDriveOdometry.getPoseMeters().getX() + ", " + swerveDriveOdometry.getPoseMeters().getY());
         }
 
-        // Used by helixnavigator
-        public Rotation2d getHeading(){
-            double raw_yaw = gyro.getAngle() - offset; // Returns yaw as -180 to +180.
-            // float raw_yaw = m_ahrs.getYaw(); // Returns yaw as -180 to +180.
-            double calc_yaw = raw_yaw;
-
-            if (0.0 > raw_yaw ) { // yaw is negative
-                calc_yaw += 360.0;
-            }
-            return Rotation2d.fromDegrees(-calc_yaw);
-        }
-
         @Override
         public void periodic(){
             super.periodic();
@@ -126,14 +114,14 @@ public class DriveTrainSubsystem extends SubsystemBase implements DriveTrainInte
 
         }
 
-        private void UpdateGyro() {
-            lastUpdatedGyroHeading = Rotation2d.fromDegrees(-
-            gyro.getAngle());
-        }
+      private void UpdateGyro() {
+          lastUpdatedGyroHeading =
+        Rotation2d.fromDegrees(-gyro.getYaw().getValueAsDouble());
+}
 
         public void flipGyro() {
             gyro.setYaw(Math.PI);
-            System.out.println("gyro: " + gyro.getAngle());
+            System.out.println("gyro: " + gyro.getYaw());
         }
 
         // public void drive(Translation2d translation, double rotation){
