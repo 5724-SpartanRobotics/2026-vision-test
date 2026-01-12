@@ -12,7 +12,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.simulation.ADXRS450_GyroSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Subsystems.Constant.CanIdConstants;
@@ -31,19 +30,8 @@ public class DriveTrainSubsystem extends SubsystemBase implements DriveTrainInte
         private SwerveModule LB;
         private SwerveModule RB;
         private Rotation2d lastUpdatedGyroHeading;
-    
-        // Used by helix, should eventually be used to zero gyro with a button
         private double offset = 0;
-
-        // Gyro for now
-        // private ADIS16448_IMU gyro;
-        // private ADIS16448_IMUSim gyroSim;
-  //      private ADXRS450_Gyro gyroFake;
-        private ADXRS450_GyroSim gyroSim;
         private Pigeon2 gyro;
-
-        // TODO make pigeon sim actually like, work
-
         private SwerveDriveKinematics swerveDriveKinematics;
         private SwerveDriveOdometry swerveDriveOdometry;
         private Pose2d robotPose;
@@ -123,42 +111,6 @@ public class DriveTrainSubsystem extends SubsystemBase implements DriveTrainInte
             gyro.setYaw(Math.PI);
             System.out.println("gyro: " + gyro.getYaw());
         }
-
-        // public void drive(Translation2d translation, double rotation){
-        //     // translation.times(1);
-        //     SwerveModuleState[] swerveModStates = swerveDriveKinematics.toSwerveModuleStates(
-        //         ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getGyroHeading()));
-        //     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModStates, DriveConstants.maxRobotSpeedmps);
-        //     LF.setDesiredState(swerveModStates[0]);
-        //     RF.setDesiredState(swerveModStates[1]);
-        //     LB.setDesiredState(swerveModStates[2]);
-        //     RB.setDesiredState(swerveModStates[3]);
-        // }
-
-        public void simulationInit()
-        {
-//            gyroSim = new ADIS16448_IMUSim(gyro);
-//            gyroSim = new ADXRS450_GyroSim(gyroFake);
-         //   LF.simulateInit();
-         //   RF.simulateInit();
-         //   LB.simulateInit();
-         //   RB.simulateInit();
-//          gyroSim.setGyroAngleY(0);
-//            gyroSim.setAngle(0);
-        }
-        @Override
-        public void simulationPeriodic(){
-            if (gyroSim == null)
-                simulationInit();
-//            gyroSim.setGyroAngleY(Units.radiansToDegrees(0.0));
-//            gyroSim.setAngle(0.0);
-         //   LF.simulatePeriodic();
-         //   RF.simulatePeriodic();
-         //   LB.simulatePeriodic();
-         //   RB.simulatePeriodic();
-            }
-
-            // used by helix
         public void brake() {
             for (SwerveModule module : modules) {
                 module.setDesiredState(new SwerveModuleState(0, module.getState().angle));

@@ -149,7 +149,6 @@ public class Constant {
         public static final int RFCanID = 12;
         public static final int PigeonID = 14;
         public static final int PDHID = 0;
-        public static final int pneumaticontroller = 15;
      }
      public final class DriveConstants {
         // Maximum robot speed (in meters per second)
@@ -192,10 +191,6 @@ public class Constant {
             public static final int GyroZero = 7;
             public static final int TagLockon = 1;
             public static final int TagLockonAlt = 11;
-            public static final int ObjectLockon = 2;
-            public static final int ObjectLockonAlt = 12;
-            public static final int OuttakePiece = -1;
-            public static final int Rotate180 = 8;
         }
     }
     public static final class DebugSetting{
@@ -221,8 +216,6 @@ public class Constant {
         public static final double cameraDepthOffset = 1;
         public static final double kPAutoShoot = 6;
         public static final double kPTurnAutoShoot = 12;
-
-        public static final String kLimelightName = "limelight";
     }
 
     public static final class CameraConstants {
@@ -231,11 +224,6 @@ public class Constant {
             public static final int Height_px = 480 / 2;
             public static final int vFOV = 60;
             public static final int hFOV = 120;
-        }
-
-        public static final class Limelight2Plus {
-            public static final double HeightFromFloor = 0.3;
-            public static final double MountAngleOffset = -0.261799;
         }
     }
 }
